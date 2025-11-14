@@ -1,13 +1,15 @@
-import perfil from "../assets/perfil.jpg";
-
-function CabeceraCV() {
+function CabeceraCV({ nombre, cargo, ciudad, contacto, foto }) {
   return (
-    <header>
-      <img src={perfil} alt="Foto de Dennis" className="foto-perfil" />
-      <h1>Dennis González</h1>
-      <h2>Regente de Farmacia</h2>
+    <header style={{ textAlign: "center" }}>
+      <img
+        src={foto}
+        alt={`Foto de ${nombre}`}
+        style={{ width: "150px", borderRadius: "8px", marginBottom: "1rem" }}
+      />
+      <h1>{nombre}</h1>
+      <h2>{cargo}</h2>
       <p>
-        Tel: 3005164213 | Email: degonzalez376@gmail.com| Medellin, Antioquia
+        {ciudad} | {contacto}
       </p>
     </header>
   );
