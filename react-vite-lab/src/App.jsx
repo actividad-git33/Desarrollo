@@ -1,8 +1,15 @@
+import { useState } from "react";
+import ToggleHabilidades from "./components/ToggleHabilidades";
+import FormularioTecnologia from "./components/FormularioTecnologia";
+import StackTecnologias from "./components/StackTecnologias";
+
 import fotoPerfil from "./assets/perfil.jpg";
 import CabeceraCV from "./components/CabeceraCV";
 import Perfil from "./components/Perfil";
 import Experiencia from "./components/Experiencia";
 import Educacion from "./components/Educacion";
+import Habilidades from "./components/Habilidades";
+import "./cv.css";
 
 function App() {
   const datosPersonales = {
@@ -52,6 +59,29 @@ function App() {
     },
   ];
 
+  // Estado global de tecnologías y habilidades
+  const [tecnologias, setTecnologias] = useState([
+    "React",
+    "Node.js",
+    "Express",
+    "SQLite",
+  ]);
+
+  const [mostrarHabilidades, setMostrarHabilidades] = useState(true);
+
+  const agregarTecnologia = (tec) => {
+    const tecNormalizada = tec.trim().toLowerCase();
+    const yaExiste = tecnologias.some(
+      (t) => t.trim().toLowerCase() === tecNormalizada
+    );
+
+    if (!yaExiste) {
+      setTecnologias([...tecnologias, tec]);
+    } else {
+      alert("Esa tecnología ya está en la lista.");
+    }
+  };
+
   return (
     <>
       <CabeceraCV {...datosPersonales} />
@@ -59,6 +89,19 @@ function App() {
         <Perfil resumen={resumen} />
         <Experiencia experiencias={experiencias} />
         <Educacion educacion={educacion} />
+
+        {/* Toggle de habilidades controlado desde App */}
+        <ToggleHabilidades
+          mostrar={mostrarHabilidades}
+          onToggle={() => setMostrarHabilidades(!mostrarHabilidades)}
+          tecnologias={tecnologias}
+        />
+
+        {/* Formulario para agregar tecnologías */}
+        <FormularioTecnologia agregarTecnologia={agregarTecnologia} />
+
+        {/* Render dinámico del stack */}
+        <StackTecnologias tecnologias={tecnologias} />
       </main>
     </>
   );
