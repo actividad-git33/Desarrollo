@@ -97,8 +97,10 @@ function App() {
           tecnologias={tecnologias}
         />
 
-        {/* Formulario para agregar tecnologías */}
-        <FormularioTecnologia agregarTecnologia={agregarTecnologia} />
+        <FormularioTecnologia
+          agregarTecnologia={agregarTecnologia}
+          tecnologias={tecnologias}
+        />
 
         {/* Render dinámico del stack */}
         <StackTecnologias tecnologias={tecnologias} />
